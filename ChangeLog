@@ -1,6 +1,7 @@
 Version 0.4.2
 =============
- * Fix bug when opening the preferences dialog when not all information is entered
+ * Fix bug when opening the preferences dialog when not all information is
+ entered (reported by Albrecht Mandl)
  * Fix password encoding issue
 
 Version 0.4.1
