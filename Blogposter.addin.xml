@@ -1,0 +1,26 @@
+<Addin id="Blogposter"
+	namespace="Tomboy"
+	name="Post note to your blog"
+	author="Robin Sonefors"
+	description="Posts individual notes as blog posts to your blog."
+	category="Tools"
+	defaultEnabled="false"
+	version="0.4.0">
+
+	<Runtime>
+		<Import assembly="Blogposter.dll" />
+	</Runtime>
+
+	<Dependencies>
+		<Addin id="Tomboy" version="0.7" />
+	</Dependencies>
+
+	<Extension path="/Tomboy/NoteAddins">
+		<NoteAddin type="Tomboy.Blogposter.Blogposter" />
+	</Extension>
+	
+	<Extension path="/Tomboy/AddinPreferences">
+		<AddinPreferenceFactory type="Tomboy.Blogposter.BlogPreferencesFactory" />
+	</Extension>
+
+</Addin>

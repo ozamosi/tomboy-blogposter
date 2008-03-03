@@ -1,0 +1,50 @@
+Version 0.4.1
+=============
+ * Fix bug when saving passwords from the dialog that pops up when you post
+ * Fix bug when getting service documents from non-blogger services that use the old namespace
+
+Version 0.4.0
+=============
+ * Migrate from old Plugin to new AddIn framework to make it work with Tomboy >= 0.7.2
+ * Add an option to post notes as drafts
+ * Clean up the source a bit
+ * Use new official APP namespace when possible
+ * Fix a bug when editing blogs that caused tomboy to crash
+ * Fix a bug when the service document was password protected
+
+Version 0.3.2
+=============
+ * Create the folder that contains the configuration if it doesn't exist
+
+Version 0.3.1
+=============
+ * Make the enter-password-at-post-time-thingy work at all
+
+Version 0.3.0
+=============
+ * Rename from Tomboy2Wordpress to TomboyBlogposter
+ * Complete rewrite
+ * Change protocol from Metaweblog to APP
+   * Thus, drop XML-RPC library
+   * Support GoogleLogin and HTTP Basic login methods
+ * Allow user to add multiple blogs
+ * Change from GConf to plain XML for account storage
+ * Don't save passwords in plain text
+ * Make it possible not to save passwords at all
+ * Ignore certificates when using HTTPS
+
+Version 0.2.0
+=============
+ * First _working_ release. 0.1.0 broke when you tried to use it according 
+   to my instructions. This hopefully doesn't :)
+ * Make api support less broken. It should be able to handle most more-or-less
+   correct MetaWeblog implementations. Tested with Wordpress and Drupal.
+ * Add support for multiple blogs on the same account.
+ * Make it crash Tomboy slightly less frequently.
+ * Turn big and huge text into <h3> resp <h2>, which should be better 
+   from a semantic point of view.
+
+Version 0.1.0
+=============
+ * First public release
+ * Basic functionality present
