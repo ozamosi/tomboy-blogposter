@@ -2,9 +2,9 @@
 // Misc.cs: Various helper functions
 //
 // Author:
-//   Robin Sonefors (ozamosi@lysator.liu.se)
+//   Robin Sonefors (ozamosi@flukkost.nu)
 //
-// Copyright (C) 2007 Robin Sonefors (http://www.flukkost.nu/blog)
+// Copyright (C) 2007-2008 Robin Sonefors (http://www.flukkost.nu/blog)
 // 
 
 using System;
@@ -69,14 +69,12 @@ namespace Blogposter
 		//Encode and decode passwords in one place
 		public static string DecodePass(XmlNode account)
 		{
-			XmlNode passwd = account.SelectSingleNode ("password/text()");
-			if (passwd == null)
-			{
+			string password = Utils.SelectSingleNodeText(account, "password");
+			if (password == "")
 				return "";
-			}
 			else
 			{
-				byte[] passwdbytes = Convert.FromBase64String (passwd.Value);
+				byte[] passwdbytes = Convert.FromBase64String (password);
 				return Encoding.UTF8.GetString (passwdbytes);
 			}
 		}
@@ -85,5 +83,27 @@ namespace Blogposter
 		{
 			return Convert.ToBase64String (Encoding.UTF8.GetBytes (cleartextpass));
 		}
+		
+		//Xpath simplification methods
+		public static string SelectSingleNodeText(XmlNode root_node, string node_name)
+		{
+			XmlNode result_node = root_node.SelectSingleNode (node_name);
+			if (result_node == null)
+				return "";
+			else
+				return result_node.InnerText;
+		}
+		
+		public static void SetOrUpdateNodeText(XmlNode root_node, string node_name, string new_value)
+		{
+			XmlNode result_node = root_node.SelectSingleNode (node_name);
+			if (result_node == null)
+			{
+				result_node = root_node.OwnerDocument.CreateElement(node_name);
+				root_node.AppendChild(result_node);
+			}
+			result_node.InnerText = new_value;
+		}
+				
 	}
 }

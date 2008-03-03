@@ -2,9 +2,9 @@
 // Blogposter.cs: The code that performs the actual posting of the note
 //
 // Author:
-//   Robin Sonefors (ozamosi@lysator.liu.se)
+//   Robin Sonefors (ozamosi@flukkost.nu)
 //
-// Copyright (C) 2007 Robin Sonefors (http://www.flukkost.nu/blog)
+// Copyright (C) 2007-2008 Robin Sonefors (http://www.flukkost.nu/blog)
 // 
 
 using System;
@@ -232,7 +232,6 @@ namespace Tomboy.Blogposter {
 			}
 */				
 			byte[] text_entry = Encoding.UTF8.GetBytes (atom_post.InnerXml);
-			
 			BlogposterWebRequest(choosen_blog, "POST", text_entry);
 			
 			// If we found more information, save it.
@@ -240,10 +239,10 @@ namespace Tomboy.Blogposter {
 
 		}
 
-		protected string GetAPPNamespace(XmlNode account, bool old)
+		protected string GetAPPNamespace(XmlNode account, bool force_old)
 		{
 			string atomns;
-			if (old || (account.SelectSingleNode ("url/text()") as XmlText).Value.ToLower ().IndexOf ("blogger") !=  -1) //Blogger use the old
+			if (force_old || (account.SelectSingleNode ("url/text()") as XmlText).Value.ToLower ().IndexOf ("blogger") !=  -1) //Blogger use the old
 			{
 				atomns = "http://purl.org/atom/app#";
 			}
@@ -274,18 +273,10 @@ namespace Tomboy.Blogposter {
 		{
 			ServicePointManager.CertificatePolicy = new UnsecureCertificatePolicy();
 			
-			XmlNode url_node = account.SelectSingleNode ("url/text()");
-			XmlNode username_node = account.SelectSingleNode ("username/text()");
 			string password = Utils.DecodePass (account);
-			string url = "";
-			string username = "";
-			
-			if (url_node != null)
-				url = url_node.Value; 
-			
-			if (username_node != null)
-				username = username_node.Value;
-			
+			string url = Utils.SelectSingleNodeText(account, "url");
+			string username = Utils.SelectSingleNodeText(account, "username");
+						
 			if (password == "")
 			{
 				string label = account.SelectSingleNode ("label/text()").Value;
@@ -296,21 +287,8 @@ namespace Tomboy.Blogposter {
 					password = login_data.Password;
 					if (login_data.Save)
 					{
-						if (username_node == null)
-						{
-							XmlText text = account.OwnerDocument.CreateTextNode (username);
-							account.SelectSingleNode ("username").AppendChild (text);
-						}
-						else
-							account.SelectSingleNode ("username/text()").Value = username;
-						XmlNode password_node = account.SelectSingleNode ("password/text()"); 
-						if (password_node == null)
-						{
-							XmlText text = account.OwnerDocument.CreateTextNode (Utils.EncodePass(password));
-							account.SelectSingleNode ("password").AppendChild (text);
-						}
-						else
-							account.SelectSingleNode ("password/text()").Value = Utils.EncodePass(password);
+						Utils.SetOrUpdateNodeText(account, "username", username);
+						Utils.SetOrUpdateNodeText(account, "password", Utils.EncodePass(password));
 					}
 					login_data.Destroy();
 				}

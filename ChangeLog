@@ -1,3 +1,8 @@
+Version 0.4.2
+=============
+ * Fix bug when opening the preferences dialog when not all information is entered
+ * Fix password encoding issue
+
 Version 0.4.1
 =============
  * Fix bug when saving passwords from the dialog that pops up when you post

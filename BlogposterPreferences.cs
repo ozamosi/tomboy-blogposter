@@ -2,9 +2,9 @@
 // BlogposterPreferences.cs: The preferences widget
 //
 // Author:
-//   Robin Sonefors (ozamosi@lysator.liu.se)
+//   Robin Sonefors (ozamosi@flukkost.nu)
 //
-// Copyright (C) 2007 Robin Sonefors (http://www.flukkost.nu/blog)
+// Copyright (C) 2007,2008 Robin Sonefors (http://www.flukkost.nu/blog)
 // 
 
 using System;
@@ -167,9 +167,9 @@ namespace Tomboy.Blogposter {
 			blog_store.Clear ();
 			foreach (XmlNode blog in this.doc.DocumentElement.SelectNodes ("account"))
 			{
-				string label = blog.SelectSingleNode ("label/text()").Value;
-				string url = blog.SelectSingleNode ("url/text()").Value;
-				string username = blog.SelectSingleNode ("username/text()").Value;
+				string label =  Utils.SelectSingleNodeText (blog, "label");
+				string url = Utils.SelectSingleNodeText (blog, "url");
+				string username = Utils.SelectSingleNodeText (blog, "username");
 				string password = Utils.DecodePass (blog);
 				
 				Gtk.TreeIter iter = blog_store.Append ();
@@ -258,9 +258,9 @@ namespace Tomboy.Blogposter {
 		{
 			XmlNode selected = GetSelected(); 
 			
-			string label = selected.SelectSingleNode ("label/text()").Value;
-			string url = selected.SelectSingleNode ("url/text()").Value;
-			string username = selected.SelectSingleNode ("username/text()").Value;
+			string label = Utils.SelectSingleNodeText (selected, "label");
+			string url = Utils.SelectSingleNodeText (selected, "url");
+			string username = Utils.SelectSingleNodeText (selected, "username");
 			string password = Utils.DecodePass (selected);
 			int response;
 			
@@ -281,10 +281,10 @@ namespace Tomboy.Blogposter {
 
 			dialog.Destroy ();
 
-			selected.SelectSingleNode ("label/text()").Value = label;
-			selected.SelectSingleNode ("url/text()").Value = url;
-			selected.SelectSingleNode ("username/text()").Value = username;
-			selected.SelectSingleNode ("password/text()").Value = password;
+			Utils.SetOrUpdateNodeText (selected, "label", label);
+			Utils.SetOrUpdateNodeText (selected, "url", url);
+			Utils.SetOrUpdateNodeText (selected, "username", username);
+			Utils.SetOrUpdateNodeText (selected, "password", Utils.EncodePass(password));
 			
 			Utils.SaveXmlfile (this.doc);
 			UpdateBlogStore ();

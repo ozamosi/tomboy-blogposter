@@ -2,9 +2,9 @@
 // AuthenticationTypes.cs: Contains authentication modules to implement custom authentication schemes. 
 //
 // Author:
-//   Robin Sonefors (ozamosi@lysator.liu.se)
+//   Robin Sonefors (ozamosi@flukkost.nu)
 //
-// Copyright (C) 2007 Robin Sonefors (http://www.flukkost.nu/blog)
+// Copyright (C) 2007-2008 Robin Sonefors (http://www.flukkost.nu/blog)
 // 
 using System;
 using System.Net;
@@ -40,7 +40,7 @@ namespace Tomboy.Blogposter
 			string password = credentials.GetCredential (request.RequestUri, auth_type).Password;
 			
 			byte[] login_data = Encoding.ASCII.GetBytes (String.Format (
-					"accountType=HOSTED_OR_GOOGLE&Email={0}&Passwd={1}&source=Tomboy-Blogposter-0.4.0&service=blogger",
+					"accountType=HOSTED_OR_GOOGLE&Email={0}&Passwd={1}&source=Tomboy-Blogposter-0.4.2&service=blogger",
 					HttpUtility.UrlEncode (username), HttpUtility.UrlEncode (password)));
 			HttpWebRequest login_request = (HttpWebRequest) WebRequest.Create("https://www.google.com/accounts/ClientLogin");
 			ServicePointManager.Expect100Continue = false;
