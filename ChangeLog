@@ -1,3 +1,8 @@
+Version 0.4.3
+=============
+ * Change the plugin file to make it work with modern versions of Tomboy
+ * Misc changes to make it easier to create Ubuntu packages (Hanno Stock)
+
 Version 0.4.2
 =============
  * Fix bug when opening the preferences dialog when not all information is

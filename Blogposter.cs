@@ -276,10 +276,10 @@ namespace Tomboy.Blogposter {
 			string password = Utils.DecodePass (account);
 			string url = Utils.SelectSingleNodeText(account, "url");
 			string username = Utils.SelectSingleNodeText(account, "username");
-						
+
 			if (password == "")
 			{
-				string label = account.SelectSingleNode ("label/text()").Value;
+				string label = Utils.SelectSingleNodeText (account, "label");
 				AskForLoginData login_data = new AskForLoginData(label, username, password); 
 				if (login_data.Run() == (int)Gtk.ResponseType.Ok)
 				{

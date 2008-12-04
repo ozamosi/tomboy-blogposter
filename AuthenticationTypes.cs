@@ -40,7 +40,7 @@ namespace Tomboy.Blogposter
 			string password = credentials.GetCredential (request.RequestUri, auth_type).Password;
 			
 			byte[] login_data = Encoding.ASCII.GetBytes (String.Format (
-					"accountType=HOSTED_OR_GOOGLE&Email={0}&Passwd={1}&source=Tomboy-Blogposter-0.4.2&service=blogger",
+					"accountType=HOSTED_OR_GOOGLE&Email={0}&Passwd={1}&source=Tomboy-Blogposter-0.4.3&service=blogger",
 					HttpUtility.UrlEncode (username), HttpUtility.UrlEncode (password)));
 			HttpWebRequest login_request = (HttpWebRequest) WebRequest.Create("https://www.google.com/accounts/ClientLogin");
 			ServicePointManager.Expect100Continue = false;

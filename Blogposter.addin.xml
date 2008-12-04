@@ -5,14 +5,14 @@
 	description="Posts individual notes as blog posts to your blog."
 	category="Tools"
 	defaultEnabled="false"
-	version="0.4.2">
+	version="0.4.3">
 
 	<Runtime>
 		<Import assembly="Blogposter.dll" />
 	</Runtime>
 
 	<Dependencies>
-		<Addin id="Tomboy" version="0.7" />
+		<Addin id="Tomboy" version="0.10" />
 	</Dependencies>
 
 	<Extension path="/Tomboy/NoteAddins">
