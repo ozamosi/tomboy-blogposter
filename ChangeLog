@@ -1,3 +1,10 @@
+Version 0.4.4
+=============
+ * Update error handling code in BlogposterWebRequest to not crash when there
+   is no response
+ * Update GoogleClient to not free the Google login token before it's been
+   saved, preventing freeze and failure
+
 Version 0.4.3
 =============
  * Change the plugin file to make it work with modern versions of Tomboy

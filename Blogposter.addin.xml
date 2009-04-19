@@ -5,7 +5,7 @@
 	description="Posts individual notes as blog posts to your blog."
 	category="Tools"
 	defaultEnabled="false"
-	version="0.4.3">
+	version="0.4.4">
 
 	<Runtime>
 		<Import assembly="Blogposter.dll" />
