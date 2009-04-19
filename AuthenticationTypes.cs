@@ -54,9 +54,9 @@ namespace Tomboy.Blogposter
 				HttpWebResponse login_response = (HttpWebResponse) login_request.GetResponse ();
 				Stream login_response_stream = login_response.GetResponseStream ();
 				StreamReader login_response_stream_reader = new StreamReader (login_response_stream);
-				login_response_stream.Close ();
 				string lines = login_response_stream_reader.ReadToEnd ();
 				login_response.Close ();
+				login_response_stream.Close ();
 				login_response_stream_reader.Close ();
 				foreach (string line in lines.Split ('\n'))
 				{
