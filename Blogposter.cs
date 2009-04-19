@@ -320,7 +320,15 @@ namespace Tomboy.Blogposter {
 			}
 			catch (WebException exception)
 			{
+				if (exception.Status == WebExceptionStatus.Timeout) {
+					StatusMsg ("Connection to the server timed out");
+					return null;
+				}
 				HttpWebResponse response = (HttpWebResponse) exception.Response;
+				if (response == null) {
+					StatusMsg ("Server error: " + exception.Status);
+					return null;
+				}
 				if ((int) response.StatusCode == 401)
 				{
 					response.Close ();
