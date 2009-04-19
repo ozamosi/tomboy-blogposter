@@ -23,7 +23,7 @@ namespace Tomboy.Blogposter
 		private string hackish_auth_type = "AuthSub"; //Kinda broken behaviour - will it help Sandy?
 		
 		public Authorization Authenticate(string challenge, WebRequest request, ICredentials credentials)
-		{	
+		{
 			int index = challenge.ToLower ().IndexOf (auth_type.ToLower ());
 			if (index == -1)
 			{
@@ -42,7 +42,7 @@ namespace Tomboy.Blogposter
 			byte[] login_data = Encoding.ASCII.GetBytes (String.Format (
 					"accountType=HOSTED_OR_GOOGLE&Email={0}&Passwd={1}&source=Tomboy-Blogposter-0.4.3&service=blogger",
 					HttpUtility.UrlEncode (username), HttpUtility.UrlEncode (password)));
-			HttpWebRequest login_request = (HttpWebRequest) WebRequest.Create("https://www.google.com/accounts/ClientLogin");
+			HttpWebRequest login_request = (HttpWebRequest) WebRequest.Create("https://www.google.com/accounts/ClientLogin?v=2");
 			ServicePointManager.Expect100Continue = false;
 			login_request.Method = "POST";
 			login_request.ContentType = "application/x-www-form-urlencoded";

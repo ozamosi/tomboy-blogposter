@@ -242,11 +242,11 @@ namespace Tomboy.Blogposter {
 		protected string GetAPPNamespace(XmlNode account, bool force_old)
 		{
 			string atomns;
-			if (force_old || (account.SelectSingleNode ("url/text()") as XmlText).Value.ToLower ().IndexOf ("blogger") !=  -1) //Blogger use the old
+			if (force_old)
 			{
 				atomns = "http://purl.org/atom/app#";
 			}
-			else //Let's assume the new namespace works (Wordpress 2.3)
+			else
 			{
 				atomns = "http://www.w3.org/2007/app";
 			}
