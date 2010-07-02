@@ -5,8 +5,8 @@ OUT = $(NAME).dll
 
 all:
 	$(CC) -debug -out:$(OUT) -target:library -pkg:tomboy-addins \
-	-r:System.Web -r:Mono.Posix AuthenticationTypes.cs Blogposter.cs \
-	BlogposterPreferences.cs Misc.cs \
+	-r:System.Web -r:Mono.Posix AuthenticationTypes.cs -pkg:gtk-sharp-2.0 \
+	Blogposter.cs BlogposterPreferences.cs Misc.cs \
 	-resource:$(NAME).xsl \
 	-resource:$(NAME).addin.xml
 
